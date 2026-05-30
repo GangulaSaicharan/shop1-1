@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import BrandForm from "../BrandForm";
 
+export const dynamic = "force-dynamic";
+
 export default async function NewBrandPage() {
   const brands = await prisma.brand.findMany({
     select: { id: true, slug: true },
