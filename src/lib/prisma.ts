@@ -3,7 +3,11 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 
 function createPrismaClient() {
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL!, max: 5 });
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL!,
+    max: 2,
+    idleTimeoutMillis: 10_000,
+  });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter, log: ["error"] });
 }
